@@ -12,3 +12,7 @@ Twitterなどで使ったちょっとした計算・シミュレーションの�
   queue.Queue が collections.deque とくらべ遅いことの検証．その他 queue.LifoQueue，queue.SimpleQueue などの比較
 + `sympy_test`
   sympy でルジャンドル陪多項式を計算する
++ `Bayesian-statics`
+  Metropolis-Hastings法によるベイズ推定
++ `random-generation`
+  乱数生成の速度比較
