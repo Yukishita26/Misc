@@ -1,0 +1,141 @@
+\documentclass[dvipdfmx,autodetect-engine,12pt]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{tikzsymbols}
+
+\DeclarePairedDelimiter{\rbra}{\lparen}{\rparen} % () round brackets
+\DeclarePairedDelimiter{\cbra}{\lbrace}{\rbrace} % {} curly brackets
+\DeclarePairedDelimiter{\sbra}{\lbrack}{\rbrack} % [] square brackets
+
+% サンプル 家
+\tikzsymbolsdefinesymbol{myHouse}{ S B{orange} B{red} B{teal} }
+{%
+    \begin{tikzpicture}[/tikzsymbolsstyle,x=1.1ex,y=1.1ex,scale=#1,line width=0.12ex*#1]
+        \fill[fill=#3] (0,1) -- (0.5,1.5) -- (1,1);
+        \filldraw[fill=#2] (0,0) rectangle (1,1);
+        \draw (-0.11,0.9) -- (0.5,1.5) -- (1.11,0.9);
+        \draw[fill=#4] (0.5,0) -- (0.5,0.5) -- (0.8,0.5) -- (0.8,0) -- cycle;
+        \fill (0.75,0.25) circle [radius=0.02];
+    \end{tikzpicture}%
+}
+
+% 無標の四角形
+\tikzsymbolsdefinesymbol{symbunmarkedsquare}{ S }{
+    \begin{tikzpicture}[/tikzsymbolsstyle,x=1ex,y=1ex,scale=#1,line width=0.1ex]
+        \draw(0,0)--(3,0)--(2.5,2)--(0.5,2.5)--cycle;
+    \end{tikzpicture}
+}
+\newcommand{\unmarkedsquare}{\symbunmarkedsquare[0.65]}
+
+% 点線□
+\tikzsymbolsdefinesymbol{dotsquare}{
+    S % scale
+    B{1} % line width factor
+    B{0ex} % descend depth
+}{%
+    \begin{tikzpicture}[/tikzsymbolsstyle,x=1ex,y=1ex,scale=#1,baseline=#3,line width=0.12ex*#2,transform shape,densely dotted]
+        \draw(0,0)--(0,1)--(1,1)--(1,0)--cycle;
+    \end{tikzpicture}%
+}
+% 点線◯
+\tikzsymbolsdefinesymbol{dotcircle}{
+    S % scale
+    B{1} % line width factor
+    B{0ex} % descend depth
+}{%
+    \begin{tikzpicture}[/tikzsymbolsstyle,x=1ex,y=1ex,scale=#1,baseline=#3,line width=0.12ex*#2,transform shape,densely dotted]
+        \draw(0,0.5)circle(0.5);
+    \end{tikzpicture}%
+}
+\newcommand{\choices}[1]{
+    {\mathchoice{#1}{#1}{\scriptsize #1}{\tiny #1}}
+}
+\newcommand{\placeholder}{\mathbin{\choices{\dotsquare[1.5][][0.15ex]}}}
+\newcommand{\dottedSquare}{\mathbin{\choices{\dotsquare[1.5][][-0.1ex]}}}
+\newcommand{\dottedCirc}{\mathbin{\choices{\dotcircle[0.8][][-0.2ex]}}}
+\newcommand{\dottedBigCirc}{\mathbin{\choices{\dotcircle[2][][0.45ex]}}}
+
+\makeatletter
+\def\parallelogram{%
+   {\mathchoice
+      {\@parallelogram\scriptsize}%
+      {\@parallelogram\scriptsize}%
+      {\@parallelogram\tiny}%
+      {\@parallelogram\tiny}}}
+\def\@parallelogram#1{%
+   \setbox\z@\hbox{#1/}\dimen@\wd\z@
+   \@tempdima 2.5\dimen@
+   \vbox{\offinterlineskip
+      \hbox{\kern.8\dimen@\vrule\@width\@tempdima\@height.4\p@}%
+      \kern-.2\p@
+      \hbox to\@tempdima{#1/\hfil\rlap/}%
+      \kern-.2\p@
+      \hbox{\kern.1\dimen@\vrule\@width\@tempdima\@height.4\p@}}}
+\makeatother
+
+\begin{document}
+
+\subsection*{サンプル}
+家 \myHouse[2]
+
+\subsection*{無標四角形記号とその他の比較}
+\show\triangle
+\show\unmarkedsquare
+\begin{gather*}
+    \triangle{\text{ABC}}\\
+    \square{\text{ABCD}}\\
+    \unmarkedsquare{\text{ABCD}}
+\end{gather*}
+
+\subsection*{プレースホルダー}
+{\tiny $ \norm{\placeholder} $ }
+{\footnotesize $ \norm{\placeholder} $ }
+{\normalsize $ \norm{\placeholder} $ }
+{\Large $ \norm{\placeholder} $ }
+{\huge $ \norm{\placeholder} $ }
+
+\subsection*{記号の点線化}
+\newcommand{\test}{
+ABC x $\dottedSquare \square \dottedCirc\circ \dottedBigCirc \bigcirc $ XYZ
+
+\begin{gather*}
+    \norm{\placeholder}, \norm{\dottedSquare}, \norm{\dottedCirc}, \norm{\dottedBigCirc}
+\end{gather*}
+
+\begin{gather*}
+    \norm{A \circ B}\\
+    \norm{A \dottedCirc B}\\
+    \norm{A \bigcirc B}\\
+    \norm{A \dottedBigCirc B}\\
+    \norm{A \mathbin{\square}B}\\
+    \norm{A \dottedSquare B}
+\end{gather*}
+}
+
+\verb`\normalsize`
+\test
+
+\verb`\scriptsize`
+{
+\scriptsize
+\test
+}
+
+\verb`\Huge`
+{
+\Huge
+\test
+}
+
+\verb`\mathchoice`で添字サイズへ対応
+$$
+    \int_{\dottedSquare}^{\dottedBigCirc} x^2 \dd x
+    = \sbra*{\frac13 x^3}_{\dottedSquare}^{\dottedBigCirc}
+    = \frac13 \rbra{\dottedBigCirc^3 - \dottedSquare^3}
+$$
+※ 添字サイズを直接\verb`\scriptsize`で指定しているので，環境が\verb`\normalsize`以外だとサイズ比がおかしくなる．もうちょっといじらないといけない．
+
+\end{document}
