@@ -22,5 +22,7 @@ Twitterなどで使ったちょっとした計算・シミュレーションの�
   [プロデルで乱数サンプリングアルゴリズムを実装する](https://qiita.com/Mopepe51/items/0612d18db835a2334030) のコード
 + `random_package_produire`  
   プロデルで線形合同法・ボックス゠ミュラー法
++ `SolveProbUT`  
+  東大入試問題2023[2] をモンテカルロシミュレーションで解く
 + `tikz-new-symbol`  
   [LaTeXで独自に作図した図形を記号として使う](https://qiita.com/Mopepe51/items/8b2307e0e057c499e2de) のコード
