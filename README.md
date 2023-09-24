@@ -24,5 +24,7 @@ Twitterなどで使ったちょっとした計算・シミュレーションの�
   プロデルで線形合同法・ボックス゠ミュラー法
 + `SolveProbUT`  
   東大入試問題2023[2] をモンテカルロシミュレーションで解く
++ `make-N_problem`  
+  $N$ 個の入力から目的の数字と等しくなる四則演算を探索する
 + `tikz-new-symbol`  
   [LaTeXで独自に作図した図形を記号として使う](https://qiita.com/Mopepe51/items/8b2307e0e057c499e2de) のコード
