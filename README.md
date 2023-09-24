@@ -14,6 +14,8 @@ Twitterなどで使ったちょっとした計算・シミュレーションの�
   sympy でルジャンドル陪多項式を計算する
 + `Bayesian-statics`  
   Metropolis-Hastings法によるベイズ推定
++ `FizzBuzz`  
+  ラグランジュ補間による冗長なFizzBuzz <https://twitter.com/Mopepe51/status/1704721020551348648>
 + `random-generation`  
   乱数生成の速度比較
 + `random_sampling_produire`  
