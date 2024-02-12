@@ -6,7 +6,7 @@ Bluesky の画像は[横幅の約3倍くらいまでトリミングされずに�
 やっつけなので公式がちゃんと対応してくれるまでの対処療法．
 雑にフィルターしているので投稿画像以外のものも変わってしまっているかも．
 
-適当なブックマークを作って，URL欄を↓の改行を消したもので置き換える．
+適当なブックマークを作って，URL欄を↓で置き換える．
 ブックマークボタンを押すと画像が縦が横の1/2の長方形の領域に押し込むようになる．
 もう一度押すと元に戻す（元のアスペクト比を復元するのが面倒なので一度変更された投稿はそのまま）．
 
@@ -14,7 +14,8 @@ Bluesky の画像は[横幅の約3倍くらいまでトリミングされずに�
 javascript:var cII;c=function(){[...document.querySelectorAll("img")].filter(d=>d.parentNode.className==="").map(d=>{d.parentNode.parentNode.style.aspectRatio=""+Math.max(parseInt(d.parentNode.parentNode.style.aspectRatio.replace(" / 1", "")), 2);d.style.objectFit="contain";});};r=function(){[...document.querySelectorAll("img")].filter(d=>d.parentNode.className==="").map(d=>{d.style.objectFit="cover";});};if(cII){clearInterval(cII);cII=null;r();}else{cII=setInterval(c,500);}
 ```
 
-改行あり版．
+改行あり版．投稿画像ごとに枠のアスペクト比固定と画像の全表示設定を行う．
+新規読み込みのため繰り返し走らせる．
 9行目の r=2 は変更する画像領域のアスペクト比．
 下から2行目の t=500 は変更処理を行う時間間隔．
 
